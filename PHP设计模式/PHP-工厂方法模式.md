@@ -109,4 +109,4 @@ $message = MessageFactory::createMessage('Ali');
 echo $message->send('您有新的短消息，请查收');
 ```
 
-![](~/15-23-25.jpg)
+![](~/PHP-工厂方法模式/15-23-25.jpg)
