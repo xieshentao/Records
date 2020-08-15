@@ -4,4 +4,6 @@ status: public
 title: README
 ---
 
-[1.简单工厂模式](PHP-简单工厂模式.md/)
+# PHP 设计模式
+1. 创建型
+  - [1.1 工厂方法模式](PHP-工厂方法模式.md)
