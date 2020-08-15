@@ -25,8 +25,7 @@ class Factory
     }
 }
 ```
->
-产品接口和产品实现
+> 产品接口和产品实现
 
 ```php
 // Products
@@ -60,16 +59,54 @@ $productB->show();
 > 形象化一点的比喻：我是一个卖手机的批发商（客户Client，业务方），我需要一批手机（产品Product），于是我去让富士康（工厂Factory）来帮我生产。我下了订单（$type变量）指明型号，然后富士康就给我对应型号的手机，然后我就继续我的工作了，和富士康的合作还真是挺愉快的。<br/>
 这里比较规范的写法可能是所有产品都会去实现一个统一的接口，然后客户端只知道接口的方法统一调用即可。不规范的话也可以不使用接口，返回各种不同的对象，类似于外观（Facade）模式进行统一的门面管理。
 
+## 简单工厂模式例子
+```php
+interface Message {
+    public function send(string $msg);
+}
 
+class AliYunMessage implements Message{
+    public function send(string $msg){
+        // 调用接口，发送短信
+        // xxxxx
+        return '阿里云短信（原阿里大鱼）发送成功！短信内容：' . $msg;
+    }
+}
 
+class BaiduYunMessage implements Message{
+    public function send(string $msg){
+        // 调用接口，发送短信
+        // xxxxx
+        return '百度SMS短信发送成功！短信内容：' . $msg;
+    }
+}
 
+class JiguangMessage implements Message{
+    public function send(string $msg){
+        // 调用接口，发送短信
+        // xxxxx
+        return '极光短信发送成功！短信内容：' . $msg;
+    }
+}
 
+Class MessageFactory {
+    public static function createFactory($type){
+        switch($type){
+            case 'Ali':
+                return new AliYunMessage();
+            case 'BD':
+                return new BaiduYunMessage();
+            case 'JG':
+                return new JiguangMessage();
+            default:
+                return null;
+        }
+    }
+}
 
+// 当前业务需要使用极光
+$message = MessageFactory::createMessage('Ali');
+echo $message->send('您有新的短消息，请查收');
+```
 
-
-
-
-
-
-
-
+![](~/15-23-25.jpg)
